@@ -1,0 +1,28 @@
+name: Practice CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Check out this repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Show Python version
+        run: python3 --version
+
+      - name: Run automated tests
+        run: python3 -m unittest discover -v
